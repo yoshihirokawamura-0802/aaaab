@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>自己評価式抑うつ性尺度（SDS）チェック表</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    table { border-collapse: collapse; width: 100%; table-layout: fixed; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: center; word-wrap: break-word; font-size: 1.3em; }
+    td.question-text { text-align: left; }
+    .result { margin-top: 20px; font-size: 1.2em; font-weight: bold; text-align: center; }
+    .button-container { text-align: center; margin-top: 20px; }
+    button {
+      padding: 15px 30px;
+      font-size: 1.1em;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .warning {
+      color: red;
+      text-align: center;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    th:first-child, td:first-child { width: 40px; }
+    th:nth-child(2), td:nth-child(2) { width: 40%; }
+    th:nth-child(n+3), td:nth-child(n+3) { width: 6em; }
+    input[type="radio"] {
+      transform: scale(2.0);
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div style="text-align: center;">
+  <h1>自己評価式抑うつ性尺度（ＳＤＳ）チェック表</h1>
+  <h2>※ここ２週間の状態を振り返ってチェックしてください。</h2>
+
+  <div style="margin: 20px 0; text-align: center; font-size: 1.5em;">
+  <label for="userId">ID：</label>
+  <input type="text" id="userId" name="userId" placeholder="例: 123456" style="font-size: 1em; padding: 8px; width: 200px;">
+
+  <label for="birthdate" style="margin-left: 30px;">生年月日：</label>
+  <input type="date" id="birthdate" name="birthdate"
+         min="1900-01-01" max="2025-12-31"
+         style="font-size: 1em; padding: 8px; width: 250px;">
+</div>
+
+
+
+
+
+  <form id="quizForm">
+    <table>
+      <thead>
+        <tr>
+          <th>番号</th>
+          <th>質問内容</th>
+          <th>殆どない</th>
+          <th>時々</th>
+          <th>かなり</th>
+          <th>殆どいつも</th>
+        </tr>
+      </thead>
+      <tbody id="questionsTable">
+        <!-- 静的に埋め込んだ質問行 -->
+        <!-- 以下20問 -->
+        <!-- 各質問の点数はJS側で制御されるためvalueに注意 -->
+        <!-- 1 -->
+        <tr><td>1</td><td class="question-text">気分が沈んで、憂鬱だ</td><td><input type="radio" name="q1" value="0"></td><td><input type="radio" name="q1" value="1"></td><td><input type="radio" name="q1" value="2"></td><td><input type="radio" name="q1" value="3"></td></tr>
+        <tr><td>2</td><td class="question-text">朝方が一番気分がよい</td><td><input type="radio" name="q2" value="0"></td><td><input type="radio" name="q2" value="1"></td><td><input type="radio" name="q2" value="2"></td><td><input type="radio" name="q2" value="3"></td></tr>
+        <tr><td>3</td><td class="question-text">些細なことで泣いたり、泣きたくなる</td><td><input type="radio" name="q3" value="0"></td><td><input type="radio" name="q3" value="1"></td><td><input type="radio" name="q3" value="2"></td><td><input type="radio" name="q3" value="3"></td></tr>
+        <tr><td>4</td><td class="question-text">夜、よく眠れない</td><td><input type="radio" name="q4" value="0"></td><td><input type="radio" name="q4" value="1"></td><td><input type="radio" name="q4" value="2"></td><td><input type="radio" name="q4" value="3"></td></tr>
+        <tr><td>5</td><td class="question-text">食欲は普通にある</td><td><input type="radio" name="q5" value="0"></td><td><input type="radio" name="q5" value="1"></td><td><input type="radio" name="q5" value="2"></td><td><input type="radio" name="q5" value="3"></td></tr>
+        <tr><td>6</td><td class="question-text">性欲は普通（異性の友人と付き合ってみたい）</td><td><input type="radio" name="q6" value="0"></td><td><input type="radio" name="q6" value="1"></td><td><input type="radio" name="q6" value="2"></td><td><input type="radio" name="q6" value="3"></td></tr>
+        <tr><td>7</td><td class="question-text">最近、痩せてきた</td><td><input type="radio" name="q7" value="0"></td><td><input type="radio" name="q7" value="1"></td><td><input type="radio" name="q7" value="2"></td><td><input type="radio" name="q7" value="3"></td></tr>
+        <tr><td>8</td><td class="question-text">便秘をしている</td><td><input type="radio" name="q8" value="0"></td><td><input type="radio" name="q8" value="1"></td><td><input type="radio" name="q8" value="2"></td><td><input type="radio" name="q8" value="3"></td></tr>
+        <tr><td>9</td><td class="question-text">普段よりも動悸がする（胸がドキドキする）</td><td><input type="radio" name="q9" value="0"></td><td><input type="radio" name="q9" value="1"></td><td><input type="radio" name="q9" value="2"></td><td><input type="radio" name="q9" value="3"></td></tr>
+        <tr><td>10</td><td class="question-text">何となく疲れる</td><td><input type="radio" name="q10" value="0"></td><td><input type="radio" name="q10" value="1"></td><td><input type="radio" name="q10" value="2"></td><td><input type="radio" name="q10" value="3"></td></tr>
+        <tr><td>11</td><td class="question-text">気持ちはいつもさっぱりしている</td><td><input type="radio" name="q11" value="0"></td><td><input type="radio" name="q11" value="1"></td><td><input type="radio" name="q11" value="2"></td><td><input type="radio" name="q11" value="3"></td></tr>
+        <tr><td>12</td><td class="question-text">いつもと変わりなく仕事をこなせる</td><td><input type="radio" name="q12" value="0"></td><td><input type="radio" name="q12" value="1"></td><td><input type="radio" name="q12" value="2"></td><td><input type="radio" name="q12" value="3"></td></tr>
+        <tr><td>13</td><td class="question-text">落ち着かず、じっとしていられない</td><td><input type="radio" name="q13" value="0"></td><td><input type="radio" name="q13" value="1"></td><td><input type="radio" name="q13" value="2"></td><td><input type="radio" name="q13" value="3"></td></tr>
+        <tr><td>14</td><td class="question-text">将来に希望（楽しみ）がある</td><td><input type="radio" name="q14" value="0"></td><td><input type="radio" name="q14" value="1"></td><td><input type="radio" name="q14" value="2"></td><td><input type="radio" name="q14" value="3"></td></tr>
+        <tr><td>15</td><td class="question-text">いつもよりイライラする</td><td><input type="radio" name="q15" value="0"></td><td><input type="radio" name="q15" value="1"></td><td><input type="radio" name="q15" value="2"></td><td><input type="radio" name="q15" value="3"></td></tr>
+        <tr><td>16</td><td class="question-text">たやすく決断できる</td><td><input type="radio" name="q16" value="0"></td><td><input type="radio" name="q16" value="1"></td><td><input type="radio" name="q16" value="2"></td><td><input type="radio" name="q16" value="3"></td></tr>
+        <tr><td>17</td><td class="question-text">自分は人の役に立つと思う</td><td><input type="radio" name="q17" value="0"></td><td><input type="radio" name="q17" value="1"></td><td><input type="radio" name="q17" value="2"></td><td><input type="radio" name="q17" value="3"></td></tr>
+        <tr><td>18</td><td class="question-text">今の生活は充実していると思う</td><td><input type="radio" name="q18" value="0"></td><td><input type="radio" name="q18" value="1"></td><td><input type="radio" name="q18" value="2"></td><td><input type="radio" name="q18" value="3"></td></tr>
+        <tr><td>19</td><td class="question-text">自分は死んだ方が他の人は幸せだと思う</td><td><input type="radio" name="q19" value="0"></td><td><input type="radio" name="q19" value="1"></td><td><input type="radio" name="q19" value="2"></td><td><input type="radio" name="q19" value="3"></td></tr>
+        <tr><td>20</td><td class="question-text">日頃している事に満足している</td><td><input type="radio" name="q20" value="0"></td><td><input type="radio" name="q20" value="1"></td><td><input type="radio" name="q20" value="2"></td><td><input type="radio" name="q20" value="3"></td></tr>
+      </tbody>
+    </table>
+
+    <div id="warning" class="warning" style="display:none;"></div>
+
+    <div class="button-container">
+      <button type="button" onclick="calculateScore()">結果を見る</button>
+      <button type="button" onclick="resetForm()" style="background-color: #f44336; float: right;">リセット</button>
+    </div>
+  </form>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    //点数の配分
+    const scoringMap = [
+      [1, 2, 3, 4], [4, 3, 2, 1], [1, 2, 3, 4], [1, 2, 3, 4],
+      [4, 3, 2, 1], [4, 3, 2, 1], [1, 2, 3, 4], [1, 2, 3, 4],
+      [1, 2, 3, 4], [1, 2, 3, 4], [4, 3, 2, 1], [4, 3, 2, 1],
+      [1, 2, 3, 4], [4, 3, 2, 1], [1, 2, 3, 4], [4, 3, 2, 1],
+      [4, 3, 2, 1], [4, 3, 2, 1], [1, 2, 3, 4], [4, 3, 2, 1]
+    ];
+
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbwDxIPWYZ6nzGz_V5xaoRThXLSt_o9ZRKjevsaVJsJwKhkvrfr7B8_zwyTSDGDa-Hmp/exec'; // WebアプリのURLに差し替え
+
+    
+    //点数の計算関数
+
+function calculateScore() {
+  const userId = document.getElementById('userId').value.trim();
+  const birthdate = document.getElementById('birthdate').value.trim();
+  const warning = document.getElementById("warning");
+  warning.style.display = "none";
+  warning.textContent = "";
+
+  if (!userId || !birthdate) {
+    warning.style.display = "block";
+    warning.textContent = "IDと生年月日は必ず入力してください。";
+    document.getElementById('result').textContent = "";
+    return;
+  }
+
+  let total = 0;
+  let allAnswered = true;
+  const answers = [];
+
+  for (let i = 1; i <= 20; i++) {
+    const selected = document.querySelector(`input[name="q${i}"]:checked`);
+    if (!selected) {
+      allAnswered = false;
+      break;
+    } else {
+      const selectedIndex = parseInt(selected.value);
+      const score = scoringMap[i - 1][selectedIndex];
+      total += score;
+      answers.push(score);
+    }
+  }
+
+  if (!allAnswered) {
+    warning.style.display = "block";
+    warning.textContent = "選択されていない質問があります。すべての質問に回答してください。";
+    document.getElementById('result').textContent = "";
+    return;
+  }
+
+  let message = '';
+  if (total < 40) {
+    message = '評価：抑うつ性は乏しい';
+  } else if (total < 50) {
+    message = '評価：軽度抑うつ性あり';
+  } else {
+    message = '評価：中等度以上の抑うつ性あり';
+  }
+
+  const resultDiv = document.getElementById('result');
+  resultDiv.textContent = `合計点: ${total}点\n${message}`;
+  resultDiv.scrollIntoView({ behavior: 'smooth', block: 'end' });
+
+  // Google Apps Scriptへ送信するデータ
+  const formData = new FormData();
+  formData.append("ID", userId);
+  formData.append("生年月日", birthdate);
+  answers.forEach((score, index) => {
+    formData.append(`Q${index + 1}`, score);
+  });
+  formData.append("合計点", total);
+  formData.append("評価", message);
+
+  fetch(scriptURL, {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => console.log('送信成功:', response))
+  .catch(error => console.error('送信エラー:', error));
+}
+
+
+
+function resetForm() {
+  // ラジオボタンの選択解除
+  const radios = document.querySelectorAll('input[type="radio"]');
+  radios.forEach(radio => radio.checked = false);
+
+  // テキスト入力欄のクリア
+  document.getElementById('userId').value = '';
+  document.getElementById('birthdate').value = '';
+
+  // 結果表示のクリア
+  document.getElementById('result').textContent = "";
+
+  // 警告文のクリア
+  const warning = document.getElementById("warning");
+  warning.style.display = "none";
+  warning.textContent = "";
+
+  // 画面最上部へスクロール（スムーズ）
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+
+  </script>
+</body>
+</html>
