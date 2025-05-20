@@ -113,7 +113,7 @@
       [4, 3, 2, 1], [4, 3, 2, 1], [1, 2, 3, 4], [4, 3, 2, 1]
     ];
 
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbwDxIPWYZ6nzGz_V5xaoRThXLSt_o9ZRKjevsaVJsJwKhkvrfr7B8_zwyTSDGDa-Hmp/exec'; // WebアプリのURLに差し替え
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbzJyduwRP5QyjzcyL5TDUrFkF-aF-l166Qq71nLLOMtisIUW5murY4fQfnDnb8mEyco/exec'; // WebアプリのURLに差し替え
 
     
     //点数の計算関数
@@ -170,14 +170,15 @@ function calculateScore() {
   resultDiv.scrollIntoView({ behavior: 'smooth', block: 'end' });
 
   // Google Apps Scriptへ送信するデータ
-  const formData = new FormData();
-  formData.append("ID", userId);
-  formData.append("生年月日", birthdate);
-  answers.forEach((score, index) => {
-    formData.append(`Q${index + 1}`, score);
-  });
-  formData.append("合計点", total);
-  formData.append("評価", message);
+const formData = new FormData();
+formData.append("userId", userId);         // ← 修正
+formData.append("birthdate", birthdate);   // ← 修正
+answers.forEach((score, index) => {
+  formData.append(`q${index + 1}`, score);  // ← 修正（Q1 → q1）
+});
+formData.append("total", total);           // ← 修正（合計点 → total）
+formData.append("evaluation", message);    // ← 修正（評価 → evaluation）
+
 
   fetch(scriptURL, {
     method: 'POST',
