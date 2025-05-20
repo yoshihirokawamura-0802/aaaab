@@ -171,6 +171,7 @@ function calculateScore() {
 
   // Google Apps Scriptへ送信するデータ
 const formData = new FormData();
+const token = urlParams.get('token'); //トークン！
 formData.append("userId", userId);         // ← 修正
 formData.append("birthdate", birthdate);   // ← 修正
 answers.forEach((score, index) => {
@@ -178,7 +179,7 @@ answers.forEach((score, index) => {
 });
 formData.append("total", total);           // ← 修正（合計点 → total）
 formData.append("evaluation", message);    // ← 修正（評価 → evaluation）
-
+formData.append("token", token); //認証用トークン！
 
   fetch(scriptURL, {
     method: 'POST',
