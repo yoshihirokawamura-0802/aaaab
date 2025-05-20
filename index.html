@@ -43,6 +43,10 @@
   <label for="userId">ID：</label>
   <input type="text" id="userId" name="userId" placeholder="例: 123456" style="font-size: 1em; padding: 8px; width: 200px;">
 
+  <label for="birthdate" style="margin-left: 30px;">生年月日：</label>
+  <input type="date" id="birthdate" name="birthdate"
+         min="1900-01-01" max="2025-12-31"
+         style="font-size: 1em; padding: 8px; width: 250px;">
 </div>
 
 
@@ -116,13 +120,14 @@
 
 function calculateScore() {
   const userId = document.getElementById('userId').value.trim();
+  const birthdate = document.getElementById('birthdate').value.trim();
   const warning = document.getElementById("warning");
   warning.style.display = "none";
   warning.textContent = "";
 
-  if (!userId) {
+  if (!userId || !birthdate) {
     warning.style.display = "block";
-    warning.textContent = "IDは必ず入力してください。";
+    warning.textContent = "IDと生年月日は必ず入力してください。";
     document.getElementById('result').textContent = "";
     return;
   }
@@ -166,14 +171,14 @@ function calculateScore() {
 
   // Google Apps Scriptへ送信するデータ
 const formData = new FormData();
-const token = urlParams.get('token'); //トークン！
 formData.append("userId", userId);         // ← 修正
+formData.append("birthdate", birthdate);   // ← 修正
 answers.forEach((score, index) => {
   formData.append(`q${index + 1}`, score);  // ← 修正（Q1 → q1）
 });
 formData.append("total", total);           // ← 修正（合計点 → total）
 formData.append("evaluation", message);    // ← 修正（評価 → evaluation）
-formData.append("token", token); //認証用トークン！
+
 
   fetch(scriptURL, {
     method: 'POST',
@@ -192,6 +197,7 @@ function resetForm() {
 
   // テキスト入力欄のクリア
   document.getElementById('userId').value = '';
+  document.getElementById('birthdate').value = '';
 
   // 結果表示のクリア
   document.getElementById('result').textContent = "";
